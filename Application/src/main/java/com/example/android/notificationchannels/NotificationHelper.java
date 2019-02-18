@@ -40,15 +40,19 @@ class NotificationHelper extends ContextWrapper {
         super(ctx);
 
         NotificationChannel chan1 = new NotificationChannel(PRIMARY_CHANNEL,
-                getString(R.string.noti_channel_default), NotificationManager.IMPORTANCE_DEFAULT);
+                getString(R.string.noti_channel_default), NotificationManager.IMPORTANCE_LOW);
         chan1.setLightColor(Color.GREEN);
         chan1.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
-        getManager().createNotificationChannel(chan1);
+        chan1.setSound(null,null);
+        chan1.setBypassDnd(false);
 
+        getManager().createNotificationChannel(chan1);
         NotificationChannel chan2 = new NotificationChannel(SECONDARY_CHANNEL,
                 getString(R.string.noti_channel_second), NotificationManager.IMPORTANCE_HIGH);
         chan2.setLightColor(Color.BLUE);
         chan2.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+        chan2.setSound(null,null);
+
         getManager().createNotificationChannel(chan2);
     }
 
@@ -66,8 +70,9 @@ class NotificationHelper extends ContextWrapper {
         return new Notification.Builder(getApplicationContext(), PRIMARY_CHANNEL)
                  .setContentTitle(title)
                  .setContentText(body)
-                 .setSmallIcon(getSmallIcon())
-                 .setAutoCancel(true);
+                 .setAutoCancel(false)
+                 .setSmallIcon(getSmallIcon());
+//                 .setAutoCancel(true);
     }
 
     /**
@@ -81,8 +86,10 @@ class NotificationHelper extends ContextWrapper {
         return new Notification.Builder(getApplicationContext(), SECONDARY_CHANNEL)
                  .setContentTitle(title)
                  .setContentText(body)
-                 .setSmallIcon(getSmallIcon())
-                 .setAutoCancel(true);
+
+                .setAutoCancel(false)
+                .setSmallIcon(getSmallIcon());
+//                 .setAutoCancel(true);
     }
 
     /**

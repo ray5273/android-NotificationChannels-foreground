@@ -57,6 +57,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         noti = new NotificationHelper(this);
         ui = new MainUi(findViewById(R.id.activity_main));
+        Intent intent = new Intent(getApplicationContext(),notiService.class);
+        startService(intent);
     }
 
     /**
